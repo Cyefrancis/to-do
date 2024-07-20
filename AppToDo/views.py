@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Task
 from django.views.generic import ListView
+from .forms import TaskForm
 # Create your views here.
 
 class TaskList(ListView):
@@ -10,3 +11,13 @@ class TaskList(ListView):
 
     def get_queryset(self):
         return Task.objects.all()
+    
+def createTask(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    else:
+        form = TaskForm()
+    return render(request, 'create_task.html', {'form': form})
