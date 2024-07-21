@@ -36,3 +36,8 @@ h1{
 .task-btn:hover{
     background-color: rgb(194, 194, 17);
 }
+
+/* form styles */
+.form-group label{
+    color: yellow !important;
+}
